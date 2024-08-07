@@ -8,7 +8,7 @@ import GlobalApi from "../../../../service/GlobalApi";
 import { useNavigate, useParams } from "react-router-dom";
 import { ShareSocial } from 'react-share-social'; 
 import { GridLoader } from "react-spinners";
-import { XIcon } from "lucide-react";
+import {Smile, XIcon } from "lucide-react";
 
 function ViewResume() {
   const [resumeInfo, setResumeInfo] = useState();
@@ -67,7 +67,7 @@ function ViewResume() {
               <GridLoader color="#00ff1e" width={20} />
             </div> 
             <h2 className="text-white mt-5 text-center px-4">Furnishing Your Resume.</h2>
-            <h2 className="text-white mt-5 text-center px-4">If using Mobile, Switch to Desktop Mode for better Preview of your Resume.</h2>
+            <h2 className="text-white mt-5 text-center px-4">If using Mobile, Switch to Desktop Mode for better Preview of your Resume<Smile/></h2>
           
           </div>
         </div>
