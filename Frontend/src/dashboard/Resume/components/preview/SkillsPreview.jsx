@@ -14,12 +14,12 @@ function SkillsPreview({ resumeInfo = {} }) {
         {skills.map((skill, index) => (
           <div key={index} className='flex justify-between items-center print:text-xs'>
             <h2 className='lg:text-xs md:text-sm sm:text-sm text-center'>{skill.name}</h2>
-            <div className='h-2 bg-gray-300 w-[80px]'>
+{/*             <div className='h-2 bg-gray-300 w-[80px]'>
               <div className='h-2 skill-bar' style={{
                 backgroundColor: themeColor,
                 width: skill?.rating * 20 + '%',
               }}></div>
-            </div>
+            </div> */}
           </div>
         ))}
       </div>
