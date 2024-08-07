@@ -3,11 +3,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Rating } from '@smastrom/react-rating';
 import '@smastrom/react-rating/style.css';
 import { Button } from '@/components/ui/button';
-import { ArrowLeft, ArrowRight, DeleteIcon, LoaderCircle, Trash2Icon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Trash2Icon, LoaderCircle } from 'lucide-react';
 import { ResumeInfoContext } from '@/context/ResumeInfoContext';
 import GlobalApi from './../../../../../service/GlobalApi';
 import { useParams } from 'react-router-dom';
 import { toast } from 'sonner';
+import { Tooltip } from 'antd';
 
 function Skills({ enabledNext }) {
     const { resumeInfo, setResumeInfo } = useContext(ResumeInfoContext);
@@ -63,42 +64,59 @@ function Skills({ enabledNext }) {
             <p>Add your Professional Skills</p>
             <div>
                 {resumeInfo.skills.map((item, index) => (
-                    <div key={index} className='flex justify-between mb-2 border rounded-lg p-3'>
-                        <div>
+                    <div key={index} className='flex flex-col sm:flex-row sm:items-center mb-3 border rounded-lg p-3'>
+                        <div className='flex-1'>
                             <label className='text-xs'>Name</label>
                             <Input
                                 value={item.name}
-                                className="w-full"
+                                className="w-full text-sm sm:text-base" // Responsive text size
                                 onChange={(e) => handleChange(index, 'name', e.target.value)}
                             />
                         </div>
-                        <Rating
-                            style={{ maxWidth: 120 }}
-                            value={item.rating}
-                            onChange={(v) => handleChange(index, 'rating', v)}
-                        />
-                        <Button variant="outline" onClick={() => removeSkill(index)} className="text-primary gap-1"><Trash2Icon className='h-4 w-4'/>Remove Skill</Button>
+                        <div className='mt-2 sm:mt-0 sm:ml-3 flex items-center'>
+                            <Rating
+                                style={{ maxWidth: 120 }}
+                                value={item.rating}
+                                onChange={(v) => handleChange(index, 'rating', v)}
+                            />
+                        </div>
+                        <Tooltip title="Delete skill">
+                        <Button 
+                            variant="outline" 
+                            onClick={() => removeSkill(index)} 
+                            className="text-red-600 border-red-600 gap-1 mt-2 sm:mt-0"
+                            size="sm" // Smaller button size for small screens
+                        >
+                            <Trash2Icon className='h-4 w-4'/>
+                        </Button>
+                        </Tooltip>
                     </div>
                 ))}
             </div>
-            <div className='flex justify-between'>
-                <div className='flex gap-2'>
-                    <Button variant="outline" onClick={addNewSkill} className="text-primary">+ Add more skills</Button>
-                </div>
-                <div className='mt-2 flex justify-end gap-3'>
+            <div className='flex flex-col sm:flex-row justify-between items-center'>
+                <Button 
+                    variant="outline" 
+                    onClick={addNewSkill} 
+                    className="text-primary mb-2 sm:mb-0"
+                    size="sm" // Smaller button size for small screens
+                >
+                    + Add more skills
+                </Button>
+                <div className='mt-2 sm:mt-0 flex gap-2'>
                     {activeFormIndex > 1 && (
-                        <Button onClick={() => setActiveFormindex(activeFormIndex - 1)}>
-                            <ArrowLeft size="sm" />
+                        <Button onClick={() => setActiveFormindex(activeFormIndex - 1)} size="sm">
+                            <ArrowLeft className='h-6 w-5' />
                         </Button>
                     )}
                     <Button
                         disabled={!enabledNext}
                         onClick={() => setActiveFormindex(activeFormIndex + 1)}
+                        size="sm" // Smaller button size for small screens
                     >
                         Next <ArrowRight />
                     </Button>
                     {isChanged && (
-                        <Button type="submit" disabled={loading} onClick={onSave}>
+                        <Button type="submit" disabled={loading} onClick={onSave} size="sm">
                             {loading ? <LoaderCircle className='animate-spin' /> : 'Save'}
                         </Button>
                     )}

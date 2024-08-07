@@ -1,13 +1,12 @@
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
 import { ResumeInfoContext } from '@/context/ResumeInfoContext';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useRef } from 'react';
 import { useParams } from 'react-router-dom';
 import GlobalApi from './../../../../../service/GlobalApi';
-import { ArrowLeft, ArrowRight, Brain, Loader, LoaderCircle } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Brain, LoaderCircle } from 'lucide-react';
 import { toast } from 'sonner';
 import { AIChatSession } from './../../../../../service/AIModal';
-import { ScaleLoader } from 'react-spinners';
 
 const prompt = "Job Title:{jobTitle}, Depends on job title give a summary for my resume within 5-6 lines in JSON format with field experience level and summary with experience level for fresher, Mid Level, Experienced";
 
@@ -21,12 +20,23 @@ function Summary({ enabledNext }) {
     const [aiGeneratedSummaryList, setAiGeneratedSummaryList] = useState([]);
     const [selectedSuggestion, setSelectedSuggestion] = useState(null);
 
+    const textareaRef = useRef(null);
+
     useEffect(() => {
         // Sync local state with context state
         if (resumeInfo?.summary) {
             setSummaryInput(resumeInfo.summary);
         }
     }, [resumeInfo?.summary]);
+
+    useEffect(() => {
+        // Adjust the textarea height based on its content
+        const textarea = textareaRef.current;
+        if (textarea) {
+            textarea.style.height = 'auto'; // Reset height to auto to get the scrollHeight
+            textarea.style.height = `${textarea.scrollHeight}px`; // Set height to scrollHeight
+        }
+    }, [summaryInput]);
 
     const GenerateSummaryFromAI = async () => {
         setIsChanged(true);
@@ -68,9 +78,7 @@ function Summary({ enabledNext }) {
         setLoading(true);
 
         const data = {
-          
-                summary: summaryInput
-            
+            summary: summaryInput
         };
 
         GlobalApi.UpdateResumeDetail(params?.resumeid, data).then(resp => {
@@ -115,14 +123,22 @@ function Summary({ enabledNext }) {
                 <h2 className='font-bold text-lg'>Summary Details</h2>
                 <p>Add Summary for your job Title</p>
                 <form className='mt-7' onSubmit={onSave}>
-                    <div className='flex justify-between items-end'>
-                        <label>Add Summary</label>
-                        <Button type="button" onClick={GenerateSummaryFromAI} size="sm" variant="outline" className='border-primary text-primary flex gap-1'>
-                            <Brain className='h-4 w-4' />Generate using AI
+                    <div className='flex flex-col sm:flex-row sm:items-center sm:justify-between'>
+                        <label className='text-sm sm:text-base mb-2 sm:mb-0'>Add Summary</label>
+                        <Button 
+                            type="button" 
+                            onClick={GenerateSummaryFromAI} 
+                            size="sm" 
+                            variant="outline" 
+                            className='border-primary text-primary flex items-center gap-1 sm:text-base'
+                        >
+                            <Brain className='h-4 w-4 sm:h-5 sm:w-5' />
+                            <span className=' sm:inline'>Generate using AI</span>
                         </Button>
                     </div>
                     <Textarea 
-                        className='mt-5'  
+                        ref={textareaRef}
+                        className='mt-5 resize-none overflow-hidden' 
                         onChange={handleTextareaChange} 
                         value={summaryInput} 
                     />

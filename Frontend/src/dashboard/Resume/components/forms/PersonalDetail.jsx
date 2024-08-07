@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom';
 import GlobalApi from './../../../../../service/GlobalApi';
 import { ArrowRight, ArrowLeft, LoaderCircle } from 'lucide-react';
 import { toast } from 'sonner';
-import { Switch } from 'antd';  // Importing Switch component from Ant Design
+import { Switch } from 'antd';
 import { CheckOutlined, CloseOutlined } from '@ant-design/icons';
 
 function PersonalDetail({ enabledNext }) {
@@ -84,7 +84,7 @@ function PersonalDetail({ enabledNext }) {
             <p>Get started with the basic information</p>
 
             <form onSubmit={onSave}>
-                <div className='grid grid-cols-2 mt-5 gap-3'>
+                <div className='grid grid-cols-1 sm:grid-cols-2 mt-5 gap-3'>
                     <div>
                         <label className='text-sm'>First Name</label>
                         <Input name="firstName" defaultValue={resumeInfo?.firstName} required onChange={handleInputChange} />
@@ -93,62 +93,64 @@ function PersonalDetail({ enabledNext }) {
                         <label className='text-sm'>Last Name</label>
                         <Input name="lastName" defaultValue={resumeInfo?.lastName} required onChange={handleInputChange} />
                     </div>
-                    <div>
-                        <label className='col-span-2'>Job Title</label>
+                    <div className='col-span-1 sm:col-span-2'>
+                        <label className='text-sm'>Job Title</label>
                         <Input name="jobTitle" defaultValue={resumeInfo?.jobTitle} onChange={handleInputChange} />
                     </div>
-                    <div>
-                        <label className='col-span-2'>Address</label>
+                    <div className='col-span-1 sm:col-span-2'>
+                        <label className='text-sm'>Address</label>
                         <Input name="address" defaultValue={resumeInfo?.address} required onChange={handleInputChange} />
                     </div>
-                    <div>
-                        <label className='col-span-2'>Phone</label>
+                    <div className='col-span-1 sm:col-span-2'>
+                        <label className='text-sm'>Phone</label>
                         <Input name="phone" defaultValue={resumeInfo?.phone} required onChange={handleInputChange} />
                     </div>
-                    <div>
-                        <label className='col-span-2'>Email</label>
+                    <div className='col-span-1 sm:col-span-2'>
+                        <label className='text-sm'>Email</label>
                         <Input name="email" defaultValue={resumeInfo?.email} required onChange={handleInputChange} />
                     </div>
-                    <div>
+                    <div className='col-span-1 sm:col-span-2'>
                         <div className='mt-2 mb-2 flex gap-2 items-center'>
                             <Switch 
                                 checked={showLinkedIn}
                                 onChange={() => handleToggleChange('linkedin')}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
+                                size="small"
                             />
-                            <p>LinkedIn</p>
+                            <p className='text-sm'>LinkedIn</p>
                         </div>
                         <div>
-                            <label className='col-span-2'>LinkedIn Username</label>
+                            <label className='text-sm'>LinkedIn Username</label>
                             <Input name="linkedinusername" defaultValue={resumeInfo?.linkedinusername} onChange={handleInputChange} />
                         </div>
                         <div>
-                            <label className='col-span-2'>LinkedIn URL</label>
+                            <label className='text-sm'>LinkedIn URL</label>
                             <Input name="linkedinurl" defaultValue={resumeInfo?.linkedinurl} onChange={handleInputChange} />
                         </div>
                     </div>
-                    <div>
+                    <div className='col-span-1 sm:col-span-2'>
                         <div className='mt-2 mb-2 flex gap-2 items-center'>
                             <Switch 
                                 checked={showGitHub}
                                 onChange={() => handleToggleChange('github')}
                                 checkedChildren={<CheckOutlined />}
                                 unCheckedChildren={<CloseOutlined />}
+                                size="small"
                             />
-                            <p>GitHub</p>
+                            <p className='text-sm'>GitHub</p>
                         </div>
                         <div>
-                            <label className='col-span-2'>GitHub Username</label>
+                            <label className='text-sm'>GitHub Username</label>
                             <Input name="githubusername" defaultValue={resumeInfo?.githubusername} onChange={handleInputChange} />
                         </div>
                         <div>
-                            <label className='col-span-2'>GitHub URL</label>
+                            <label className='text-sm'>GitHub URL</label>
                             <Input name="githuburl" defaultValue={resumeInfo?.githuburl} onChange={handleInputChange} />
                         </div>
                     </div>
                 </div>
-                <div className='mt-3 flex justify-end gap-3'>
+                <div className='mt-3 flex flex-col sm:flex-row justify-end gap-3'>
                     {activeFormIndex > 1 && <Button onClick={() => setActiveFormindex(activeFormIndex - 1)}>
                         <ArrowLeft size="sm" />
                     </Button>}

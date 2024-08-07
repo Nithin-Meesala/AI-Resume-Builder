@@ -3,7 +3,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import GlobalApi from './../../../../../service/GlobalApi';
 
-import { ArrowLeft, ArrowRight, Brain, LoaderCircle, Trash2Icon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, Brain, LoaderCircle, PlusIcon, Trash2Icon } from 'lucide-react';
 import { Textarea } from '@/components/ui/textarea';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -116,22 +116,22 @@ function Projects({ enabledNext }) {
 
     return (
         <div>
-            <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5'>
-                <h2 className='font-bold text-lg'>Projects</h2>
-                <p>Add your Projects</p>
+            <div className='lg:p-5 pt-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5'>
+                <h2 className='font-bold text-lg '>Projects</h2>
+                <p className=''>Add your Projects</p>
                 <div>
                     {projectsList.map((item, index) => (
                         <div key={index}>
-                            <div className='grid gap-3 border p-3 my-5 rounded-lg'>
+                            <div className='grid gap-3 border lg:p-3 p-1 my-5 rounded-lg'>
                                 <div>
-                                    <label className='text-md text-'>Project Title</label>
+                                    <label className='text-md font-semibold'>Project Title</label>
                                     <Input
                                         defaultValue={item?.projectTitle}
                                         onChange={(event) => handleChange(index, event)}
                                         name="projectTitle"
                                     />
                                 </div>
-                                <div className='flex justify-between items-end mt-2'>
+                                <div className='flex justify-between items-end mt-2 font-semibold'>
                                     <label>Add Project Description</label>
                                     <Button type="button" onClick={()=>{GenerateDescriptionFromAI(index)}} size="sm" variant="outline" className='border-primary text-primary flex gap-1'>
                                         <Brain className='h-4 w-4' />Generate using AI
@@ -148,7 +148,7 @@ function Projects({ enabledNext }) {
                                 <Button 
                                     variant="outline" 
                                     onClick={() => RemoveProject(index)} 
-                                    className="border-primary text-primary hover:text-black  mt-2 "
+                                    className="border-red-600 text-red-600 hover:text-black  mt-2 "
                                 >
                                     <Trash2Icon/> Remove Project
                                 </Button>
@@ -157,9 +157,9 @@ function Projects({ enabledNext }) {
                         </div>
                     ))}
                 </div>
-                <div className='flex justify-between'>
-                    <Button variant="outline" onClick={AddNewProjects} className="text-primary">+ Add More Projects</Button>
-                    <div className='mt-2 flex justify-end gap-3'>
+                <div className='flex justify-between items-center'>
+                    <Button variant="outline" onClick={AddNewProjects} className="text-primary"><PlusIcon/> Add </Button>
+                    <div className=' flex justify-end gap-3 items-center '>
                         {activeFormIndex > 1 && (
                             <Button onClick={() => setActiveFormindex(activeFormIndex - 1)} className='bg-primary text-white'>
                                 <ArrowLeft size="sm" />

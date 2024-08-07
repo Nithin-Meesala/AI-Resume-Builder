@@ -3,10 +3,11 @@ import { Input } from '@/components/ui/input';
 import React, { useContext, useEffect, useState } from 'react';
 import RichTextEditor from '../RichTextEditor';
 import { ResumeInfoContext } from '@/context/ResumeInfoContext';
-import { ArrowLeft, ArrowRight, LoaderCircle, Trash2Icon } from 'lucide-react';
+import { ArrowLeft, ArrowRight, LoaderCircle, Plus, PlusSquareIcon, Trash2Icon } from 'lucide-react';
 import { useParams } from 'react-router-dom';
 import GlobalApi from './../../../../../service/GlobalApi';
 import { toast } from 'sonner';
+import { Tooltip } from 'antd';
 
 const formField = {
     title: '',
@@ -73,9 +74,7 @@ function Experience({ enabledNext }) {
     const onSave = () => {
         setLoading(true);
         const data = {
-            
-                experience: experienceList.map(({ id, ...rest }) => rest)
-            
+            experience: experienceList.map(({ id, ...rest }) => rest)
         };
         console.log(experienceList);
 
@@ -93,19 +92,25 @@ function Experience({ enabledNext }) {
 
     return (
         <div>
-            <div className='p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5'>
+            <div className='lg:p-5 p-2 md:p-5 shadow-lg rounded-lg border-t-primary border-t-4 mt-5'>
                 <h2 className='font-bold text-lg'>Professional Experience</h2>
                 <p>Add your Job Experience</p>
                 <div>
                     {experienceList.map((item, index) => (
                         <div key={index}>
-                            <div className='flex justify-end mr-2    '>
-                                <Button variant="outline"
-                                   onClick={() => RemoveExperience(index)}
-                                   className="text-primary border-primary gap-1 h-[36px] "><Trash2Icon className='h-4 w-4'/>Remove Experience
-                                </Button>
+                            <div className='flex justify-end mr-2'>
+                            <Tooltip title="Delete the Experience">
+                                <Button 
+                                    variant="outline"
+                                    onClick={() => RemoveExperience(index)}
+                                    className="text-red-600 mt-3 border-red-600 gap-1 h-[25px] sm:h-[32px] md:h-[36px] lg:h-[40px] px-2 sm:px-3 md:px-4 lg:px-5"
+                                >
+                                    
+                                    <Trash2Icon className='h-4 w-4' />
+                                   </Button>
+                            </Tooltip>
                             </div>
-                            <div className='grid grid-cols-2 gap-3 border p-3 my-5 rounded-lg'>
+                            <div className='grid grid-cols-2 gap-3 border lg:p-3 my-5 rounded-lg'>
                                 <div>
                                     <label className='text-xs'>Position/ Title</label>
                                     <Input
@@ -165,29 +170,42 @@ function Experience({ enabledNext }) {
                                         onAiGenerate={() => handleAiGenerate(index)}
                                     />
                                 </div>
-                                
                             </div>
                         </div>
                     ))}
                 </div>
-                <div className='flex justify-between '>
+                <div className='flex justify-between items-center'>
                     <div className='flex gap-2'>
-                        <Button variant="outline" onClick={AddNewExperience} className="text-primary">+ Add More Experience</Button>
+                        <Button 
+                            variant="outline" 
+                            onClick={AddNewExperience} 
+                            className="text-primary h-[28px] sm:h-[32px] md:h-[36px] lg:h-[40px] px-2 sm:px-3 md:px-4 lg:px-5 "
+                        >
+                            <Plus size={20} />Add
+                        </Button>
                     </div>
-                    <div className='mt-2 flex justify-end gap-3'>
+                    <div className=' flex justify-end gap-3 items-center'>
                         {activeFormIndex > 1 && (
-                            <Button onClick={() => setActiveFormindex(activeFormIndex - 1)}>
+                            <Button 
+                                onClick={() => setActiveFormindex(activeFormIndex - 1)} 
+                                className="h-[28px] sm:h-[32px] md:h-[36px] lg:h-[40px] px-2 sm:px-3 md:px-4 lg:px-5"
+                            >
                                 <ArrowLeft size="sm" />
                             </Button>
                         )}
                         <Button
                             disabled={!enabledNext}
                             onClick={() => setActiveFormindex(activeFormIndex + 1)}
+                            className="h-[28px] sm:h-[32px] md:h-[36px] lg:h-[40px] px-2 sm:px-3 md:px-4 lg:px-5"
                         >
                             Next <ArrowRight />
                         </Button>
                         {isChanged && (
-                            <Button disabled={loading} onClick={onSave}>
+                            <Button 
+                                disabled={loading} 
+                                onClick={onSave} 
+                                className="h-[28px] sm:h-[32px] md:h-[36px] lg:h-[40px] px-2 sm:px-3 md:px-4 lg:px-5"
+                            >
                                 {loading ? <LoaderCircle className='animate-spin'/> : 'Save'}
                             </Button>
                         )}

@@ -158,7 +158,7 @@ function Education({ enabledNext }) {
                             <Button
                                 variant="outline"
                                 onClick={() => RemoveEducation(index)}
-                                className="text-primary col-span-2 gap-1"
+                                className="text-red-600 col-span-2 gap-1 "
                             >
                                 <Trash2Icon /> Remove Education
                             </Button>
@@ -166,14 +166,14 @@ function Education({ enabledNext }) {
                     </div>
                 ))}
             </div>
-            <div className='flex justify-between'>
+            <div className='flex justify-between items-center'>
                 <div className='flex gap-2'>
                     <Button
                         variant="outline"
                         onClick={AddNewEducation}
                         className="text-primary"
                     >
-                        + Add More Education
+                        + Add 
                     </Button>
                 </div>
                 <div className='mt-2 flex justify-end gap-3'>
