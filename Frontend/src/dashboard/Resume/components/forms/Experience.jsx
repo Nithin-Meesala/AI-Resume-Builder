@@ -109,7 +109,7 @@ function Experience({ enabledNext }) {
                                 <div>
                                     <label className='text-xs'>Position/ Title</label>
                                     <Input
-                                        defaultValue={item?.title}
+                                        defaultValue={item?.workTitle}
                                         onChange={(event) => handleChange(index, event)}
                                         name="workTitle"
                                     />

@@ -1,7 +1,8 @@
 import axios from "axios";
 
+const domainurl = "https://ai-resume-builder-backend-kakl.onrender.com"
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:8000/api/v1',
+  baseURL: `${domainurl}/api/v1`,
   headers: {
     'Content-Type': 'application/json',
     
