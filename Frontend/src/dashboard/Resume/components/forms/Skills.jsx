@@ -73,13 +73,13 @@ function Skills({ enabledNext }) {
                                 onChange={(e) => handleChange(index, 'name', e.target.value)}
                             />
                         </div>
-                        <div className='mt-2 sm:mt-0 sm:ml-3 flex items-center'>
+{/*                         <div className='mt-2 sm:mt-0 sm:ml-3 flex items-center'>
                             <Rating
                                 style={{ maxWidth: 120 }}
                                 value={item.rating}
                                 onChange={(v) => handleChange(index, 'rating', v)}
                             />
-                        </div>
+                        </div> */}
                         <Tooltip title="Delete skill">
                         <Button 
                             variant="outline" 
