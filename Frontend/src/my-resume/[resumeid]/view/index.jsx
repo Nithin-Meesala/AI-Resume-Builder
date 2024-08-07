@@ -66,8 +66,8 @@ function ViewResume() {
             <div className="text-white gap-3 flex justify-center mb-10">
               <GridLoader color="#00ff1e" width={20} />
             </div> 
-            <h2 className="text-white mt-5 text-center px-4">Furnishing Your Resume.</h2>
-            <h2className="text-white mt-5 text-center px-4"> For Better Preview open the site in Desktop Mode</h2>
+            <h2 className="text-white mt-5 text-center px-4">Furnishing Your Resume.Please be Patient.</h2>
+          
           </div>
         </div>
       ) : (
