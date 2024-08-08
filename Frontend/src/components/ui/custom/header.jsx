@@ -16,7 +16,7 @@ function Header() {
             {/* Logo Section */}
             <div className='flex-shrink-0'>
                 <img 
-                    src="/logo.svg" 
+                    src="/logo3.svg" 
                     alt="Logo" 
                     onClick={handleLogo} 
                     className='cursor-pointer w-12 h-12 sm:w-9 sm:h-9 md:w-[100px] md:h-[50px] lg:w-[100px] lg:h-[50px]'
