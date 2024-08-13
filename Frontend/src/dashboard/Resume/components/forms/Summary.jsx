@@ -41,17 +41,24 @@ function Summary({ enabledNext }) {
     const GenerateSummaryFromAI = async () => {
         setIsChanged(true);
         setLoading(true);
+    
+        if (!resumeInfo?.jobTitle) {
+            toast('Please add a job title.');
+            setLoading(false);
+            return;
+        }
+    
         const PROMPT = prompt.replace('{jobTitle}', resumeInfo?.jobTitle);
         console.log("Generated Prompt: ", PROMPT);
-
+    
         try {
             const result = await AIChatSession.sendMessage(PROMPT);
             const responseText = await result.response.text();
             console.log("AI Response Text: ", responseText);
-
+    
             // Wrap the responseText in an array brackets if it's not already an array
             const formattedResponseText = `[${responseText}]`;
-
+    
             // Parse the response as a JSON array
             let parsedResponse;
             try {
@@ -59,19 +66,27 @@ function Summary({ enabledNext }) {
                 console.log("Parsed Response: ", parsedResponse);
             } catch (parseError) {
                 console.error("Failed to parse JSON response:", parseError);
+                toast.error("AI did not return a valid summary.Save Details,Refresh and try again.");
                 setLoading(false);
                 return;
             }
-
-            // Assuming the response is a list of summaries
-            setAiGeneratedSummaryList(parsedResponse);
-            toast('Summary generated!');
+    
+            // Check if the parsed response contains valid content
+            if (parsedResponse.length > 0 && parsedResponse[0]?.summary) {
+                setAiGeneratedSummaryList(parsedResponse);
+                toast.success('Summary generated successfully!');
+            } else {
+                toast.error("AI did not return a valid summary.Save Details,Refresh and try again.");
+            }
         } catch (error) {
             console.error("Error generating summary from AI:", error);
+            toast.error("There seems to be an issue with the AI service. Please try again or refresh the page.");
         } finally {
             setLoading(false);
         }
     };
+    
+    
 
     const onSave = (e) => {
         e.preventDefault();
