@@ -93,23 +93,23 @@ function PersonalDetail({ enabledNext }) {
                         <label className='text-sm'>Last Name</label>
                         <Input name="lastName" defaultValue={resumeInfo?.lastName} required onChange={handleInputChange} />
                     </div>
-                    <div className='col-span-1 sm:col-span-2'>
+                    <div className='lg:col-span-1 sm:col-span-2'>
                         <label className='text-sm'>Job Title</label>
                         <Input name="jobTitle" defaultValue={resumeInfo?.jobTitle} onChange={handleInputChange} />
                     </div>
-                    <div className='col-span-1 sm:col-span-2'>
+                    <div className='lg:col-span-1 sm:col-span-2'>
                         <label className='text-sm'>Address</label>
                         <Input name="address" defaultValue={resumeInfo?.address} required onChange={handleInputChange} />
                     </div>
-                    <div className='col-span-1 sm:col-span-2'>
+                    <div className='lg:col-span-1 sm:col-span-2'>
                         <label className='text-sm'>Phone</label>
                         <Input name="phone" defaultValue={resumeInfo?.phone} required onChange={handleInputChange} />
                     </div>
-                    <div className='col-span-1 sm:col-span-2'>
+                    <div className='lg:col-span-1 sm:col-span-2'>
                         <label className='text-sm'>Email</label>
                         <Input name="email" defaultValue={resumeInfo?.email} required onChange={handleInputChange} />
                     </div>
-                    <div className='col-span-1 sm:col-span-2'>
+                    <div className='lg:col-span-1 sm:col-span-2'>
                         <div className='mt-2 mb-2 flex gap-2 items-center'>
                             <Switch 
                                 checked={showLinkedIn}
@@ -129,7 +129,7 @@ function PersonalDetail({ enabledNext }) {
                             <Input name="linkedinurl" defaultValue={resumeInfo?.linkedinurl} onChange={handleInputChange} />
                         </div>
                     </div>
-                    <div className='col-span-1 sm:col-span-2'>
+                    <div className='lg:col-span-1 sm:col-span-2'>
                         <div className='mt-2 mb-2 flex gap-2 items-center'>
                             <Switch 
                                 checked={showGitHub}
