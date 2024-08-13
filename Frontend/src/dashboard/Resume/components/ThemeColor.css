@@ -1,0 +1,25 @@
+.custom-tour-step .ant-tour-content {
+    width: 40%; /* Default width as a percentage of the screen */
+    position: fixed; /* Fixed positioning to ensure it's always visible */
+    left: 50%; /* Center horizontally */
+    top: 50%; /* Center vertically */
+    transform: translate(-50%, -50%); /* Adjust for true centering */
+}
+
+@media (max-width: 1200px) {
+    .custom-tour-step .ant-tour-content {
+        width: 50%; /* Slightly narrower for medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .custom-tour-step .ant-tour-content {
+        width: 60%; /* Narrower for small screens */
+    }
+}
+
+@media (max-width: 480px) {
+    .custom-tour-step .ant-tour-content {
+        width: 80%; /* Narrowest for very small screens */
+    }
+}
