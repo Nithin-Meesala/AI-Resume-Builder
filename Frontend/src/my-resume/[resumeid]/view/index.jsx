@@ -54,7 +54,6 @@ function ViewResume() {
   };
 
   const HandleDownload = () => {
-    window.alert('For the best print results, please enable "Background graphics" in the print > More settings > "Background graphics".');
     window.print();
   };
 
