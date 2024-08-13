@@ -66,7 +66,7 @@ function ThemeColor() {
     const steps = [
         {
             title: 'Choose Theme Color',
-            target: () => ref1.current,
+            target: () => null,
             className: 'custom-tour-step',
         }
     ];
