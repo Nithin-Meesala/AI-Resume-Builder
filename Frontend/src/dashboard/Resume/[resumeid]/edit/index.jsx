@@ -39,7 +39,9 @@ function EditResume() {
         {/* {Preview Section} */}
         <div className='hidden md:block'>
           <div className='text-4xl font-bold flex justify-center items-center mb-6'><h1>Resume Preview</h1></div>
-          <ResumePreview />
+         <div className='mt-20'>
+          <ResumePreview/>
+          </div>
         </div>
       </div>
       <div className='flex justify-center items-center mt-1 '>
