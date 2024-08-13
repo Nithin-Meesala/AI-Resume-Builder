@@ -19,7 +19,7 @@ function App() {
     <>
       <Header/>
       <Outlet/>
-      <Toaster richColors/>  
+      <Toaster richColors position="top-center"/>  
     </>
   )
 }
