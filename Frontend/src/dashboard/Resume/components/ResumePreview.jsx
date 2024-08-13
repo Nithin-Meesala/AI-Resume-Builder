@@ -14,7 +14,7 @@ function ResumePreview() {
     const { showLinkedIn, setShowLinkedIn } = useContext(ResumeInfoContext);
     const { showGitHub, setShowGitHub } = useContext(ResumeInfoContext);
   return (
-    <div className='  mr-10 ml-10 pt-3 mb-0 border-t-[10px]'
+    <div className='  mr-10 ml-10 pt-3 mb-0 border-t-[10px] mt-20'
     style={{borderColor:resumeInfo?.themeColor}}
    >
         {/* Personal Details */}
