@@ -59,6 +59,8 @@ function Projects({ enabledNext }) {
         setIsChanged(true);
         setLoading(true);
         const projectTitle = projectsList[index]?.projectTitle || '';
+    
+        // Generate prompt with the project title
         const PROMPT = prompt.replace('{projectTitle}', projectTitle);
         console.log("Generated Prompt: ", PROMPT);
     
@@ -67,24 +69,41 @@ function Projects({ enabledNext }) {
             const responseText = await result.response.text();
             console.log("AI Response Text: ", responseText);
     
-            // Update the specific project's description with the AI response
-            setprojectsList(prevProjectsList => {
-                const updatedProjects = prevProjectsList.map((project, i) => {
-                    if (i === index) {
-                        return { ...project, projectDescription: responseText.replace('{','').replace('}','').replace("description",'').replace(':','').replace('""','').replace('"','').replace('"','') };
-                    }
-                    return project;
-                });
-                return updatedProjects;
-            });
+            // Check if the AI response is valid and not empty
+            if (responseText && responseText.trim()) {
+                // Format the response by removing unwanted characters
+                const formattedResponse = responseText
+                    .replace('{', '')
+                    .replace('}', '')
+                    .replace("description", '')
+                    .replace(':', '')
+                    .replace('""', '')
+                    .replace('"', '')
+                    .replace('"', '');
     
-            toast('Summary generated!');
+                // Update the specific project's description with the formatted AI response
+                setprojectsList(prevProjectsList => {
+                    const updatedProjects = prevProjectsList.map((project, i) => {
+                        if (i === index) {
+                            return { ...project, projectDescription: formattedResponse };
+                        }
+                        return project;
+                    });
+                    return updatedProjects;
+                });
+    
+                toast.success('Project description generated successfully!');
+            } else {
+                toast.error("AI did not return a valid summary.Save Details,Refresh and try again.");
+            }
         } catch (error) {
-            console.error("Error generating summary from AI:", error);
+            console.error("Error generating description from AI:", error);
+            toast.error("AI did not return a valid summary.Save Details,Refresh and try again.");
         } finally {
             setLoading(false);
         }
     };
+    
 
     useEffect(() => {
         setResumeInfo({
